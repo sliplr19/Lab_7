@@ -1,4 +1,4 @@
-Lab 08 - University of Edinburgh Art Collection
+Lab 07 - University of Edinburgh Art Collection
 ================
 Insert your name here
 Insert date here
