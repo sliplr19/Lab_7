@@ -1,4 +1,4 @@
-Lab 07 - University of Edinburgh Art Collection
+Lab 08 - University of Edinburgh Art Collection
 ================
 Insert your name here
 Insert date here
@@ -31,7 +31,7 @@ uoe_art <- uoe_art %>%
 
 ### Exercise 10
 
-Remove this text, and add your answer for Exercise 1 here. Add code
+Remove this text, and add your answer for Exercise 10 here. Add code
 chunks as needed. Don’t forget to label your code chunk. Do not use
 spaces in code chunk labels.
 
