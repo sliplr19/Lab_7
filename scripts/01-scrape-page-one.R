@@ -17,7 +17,7 @@ titles <- page %>%
   html_nodes(".iteminfo") %>%
   html_node("h3 a") %>%
   html_text() %>%
-  ___()
+  str_squish()
 
 # scrape links -----------------------------------------------------------------
 
@@ -25,21 +25,21 @@ links <- page %>%
   html_nodes(".iteminfo") %>%
   html_node("h3 a") %>%
   html_attr("href") %>%
-  str_replace("\\.", "___")
+  str_replace("\\.", "https://collections.ed.ac.uk/art")
 
 # scrape artists ---------------------------------------------------------------
 
 artists <- page %>%
   html_nodes(".iteminfo") %>%
   html_node(".artist") %>%
-  ___
+  html_text()
 
 # put together in a data frame -------------------------------------------------
 
 first_ten <- tibble(
-  title = ___,
-  artist = ___,
-  link = ___
+  title = titles,
+  artist = artists,
+  link = links
 )
 
 # scrape second ten paintings --------------------------------------------------
