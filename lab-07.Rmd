@@ -12,29 +12,66 @@ library(tidyverse)
 library(skimr)
 ```
 
-```{r load-data, message = FALSE, eval = FALSE}
+```{r load-data, message = FALSE, eval = TRUE}
 # Remove eval = FALSE or set it to TRUE once data is ready to be loaded
 uoe_art <- read_csv("data/uoe-art.csv")
 ```
 
-### Exercise 9
+### Exercise 10
 
 ```{r separate-title-date, error = TRUE}
 uoe_art <- uoe_art %>%
   separate(title, into = c("title", "date"), sep = "\\(") %>%
   mutate(year = str_remove(date, "\\)") %>% as.numeric()) %>%
-  select(title, artist, year, ___)
+  select(title, artist, year, link)
 ```
-
-### Exercise 10
-
-Remove this text, and add your answer for Exercise 10 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+The warning is fine because it's just saying it's filling in the missing dates with NA. 
 
 ### Exercise 11
 
-...
+```{r data_skim}
+skim(uoe_art)
+```
+1 has a missing title, 115 have missing artists, 0 have missing links, and 1369 have missing years.
 
-Add exercise headings as needed.
+
+### Exercise 12
+
+```{r year_hist}
+ggplot(data = uoe_art, aes(x = year)) +
+  geom_histogram(binwidth = 1)
+```
+
+I just did table(uoe_art$year) and found that there's a datapoint at year 2, which is what is messing with this graph. Let's look at it.
+
+```{r look_2}
+uoe_art %>% 
+  filter(year == 2)
+
+```
+Okay, so it's called Death Mask(2) and that's where the confusion is. Let's change it to the real year and name.
+
+##Exercise 13
+
+```{r mut_2}
+uoe_art$year[uoe_art$year == 2] <- 1964
+uoe_art$title[uoe_art$title == "Death Mask"] <- "Death Mask(2)"
+```
+
+Just checked with table and it's correct. Now we'll redo the histogram.
+
+```{r year_hist_2}
+ggplot(data = uoe_art, aes(x = year)) +
+  geom_histogram(binwidth = 2) +
+  labs(x = "Year", y = "Count", title = "Count of art by year")
+```
+## Exercise 14
+
+```{r ar}
+uoe_art %>%
+  count(artist) %>%
+  arrange(desc(n))
+```
+
+Besides the prominent "Unknown," Emma Gillies is byfar the most featured artist. My guess for why this museum has so much of her work is that she's from Edinburgh.  
+
