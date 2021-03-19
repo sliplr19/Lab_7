@@ -10,6 +10,7 @@ output: github_document
 ```{r load-packages, message = FALSE}
 library(tidyverse) 
 library(skimr)
+library(stringr)
 ```
 
 ```{r load-data, message = FALSE, eval = TRUE}
@@ -75,3 +76,11 @@ uoe_art %>%
 
 Besides the prominent "Unknown," Emma Gillies is byfar the most featured artist. My guess for why this museum has so much of her work is that she's from Edinburgh.  
 
+## Exercise 15
+
+```{r child}
+uoe_art %>% 
+ filter(str_detect(title, fixed('child', ignore_case = TRUE))) 
+```
+
+There are 10 pieces of art with child in the title.
